@@ -3,14 +3,119 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&family=Titan+One&display=swap" rel="stylesheet">
     <title>my website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- fullPage.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.21/fullpage.min.css" />
     <style>
+        .fp-watermark {
+            display: none !important;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #b68b8b;
+            font-family: 'Schoolbell', 'Segoe UI', Arial, sans-serif;
+            background: #EDE6D6;
             margin: 0;
             padding: 0;
+        }
+
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        .avatar-wrap {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 800px;
+            aspect-ratio: 1/1;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            display: block;
+            opacity: 0;
+            animation: fadein 1s ease-in forwards;
+        }
+
+        .avatar-text {
+            position: absolute;
+            left: 52%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: #4A3C3C;
+            text-align: center;
+            text-shadow: 0 2px 8px #fff;
+            width: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .cat-text {
+            position: absolute;
+            left: 42%;
+            top: 70%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5em;
+            color: #4A3C3C;
+            text-align: center;
+            text-shadow: 0 2px 8px #fff;
+            width: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .screen-area {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 800px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .screen-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .avatar-text {
+                font-size: 1.2em;
+            }
+
+            .cat-text {
+                font-size: 1em;
+            }
+        }
+
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .container {
@@ -34,36 +139,44 @@
 </head>
 
 <body>
-    <div class="container">
-
-        <h1>test_h1</h1>
-
-
-        <p>test_h1_2</p>
-        <p>test_h1_3</p>
-
-
-        <hr>
-
-        <h2>contact</h2>
-        <p>Gmail：<a href="mailto:willy110439@email.com">willy110439@email.com</a></p>
-        <p>GitHub：<a href="https://github.com/1103r74t8g" target="_blank">1103r74t8g</a></p>
-        <p>Discord：<a href="https://discord.com/users/wkaatt" target="_blank">wk1104</a></p>
-
-
-        <h2>skill</h2>
-        <ul>
-            <li>skill_test</li>
-            <li>skill_test_2</li>
-            <li>skill_test_3</li>
-        </ul>
-
-        <!-- 
-      <img src="images/" alt="" width="200">
-    -->
-
-
-    </div>
+    <div id="fullpage">
+        <!-- Page 1 -->
+        <div class="section">
+            <div class="avatar-wrap">
+                <img src="me.png" alt="My Avatar" class="avatar-img">
+                <div class="avatar-text">Hi, This is Me</div>
+                <div class="cat-text">AND MY CAT !</div>
+            </div>
+        </div>
+        <!-- Page 2 -->
+        <div class="section">
+            <div class="screen-area">
+                <img src="screen.png" alt="Screen" class="screen-img">
+                <div class="folders">
+                    <div class="folder" data-modal="about">
+                        <img src="folder_about.png" alt="About Me" class="folder-img">
+                        <span>About Me</span>
+                    </div>
+                    <div class="folder" data-modal="contact">
+                        <img src="folder_contact.png" alt="Contact" class="folder-img">
+                        <span>Contact</span>
+                    </div>
+                    <div class="folder" data-modal="activities">
+                        <img src="folder_activities.png" alt="Activities" class="folder-img">
+                        <span>Activities</span>
+                    </div>
+                </div>
+            </div>
+            <!-- more .section -->
+        </div>
+        <!-- fullPage.js JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.21/fullpage.min.js"></script>
+        <script>
+            new fullpage('#fullpage', {
+                autoScrolling: true,
+                navigation: true
+            });
+        </script>
 </body>
 
 </html>
