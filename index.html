@@ -83,17 +83,58 @@
 
         .screen-area {
             position: relative;
-            width: 100vw;
-            height: 100vh;
-            max-width: 800px;
+            width: 90vw;
+            max-width: 700px;
             margin: 0 auto;
-            box-sizing: border-box;
         }
 
         .screen-img {
             width: 100%;
-            height: auto;
             display: block;
+            border-radius: 16px;
+        }
+
+        .icon-grid {
+            position: absolute;
+            left: 17%;
+            top: 30%;
+            width: 66%;
+            height: 60%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 8px 32px;
+            justify-items: center;
+            align-items: start;
+
+        }
+
+        .icon-item:hover .icon-img {
+            transform: scale(1.12);
+            transition: transform 0.2s cubic-bezier(.4, 2, .3, 1);
+        }
+
+        .icon-img {
+            transition: transform 0.2s cubic-bezier(.4, 2, .3, 1);
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon-img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 8px;
+        }
+
+        .icon-label {
+            font-size: 1.5em;
+            color: #333;
+            text-align: center;
+            text-shadow: 0 1px 6px #fff;
         }
 
 
@@ -166,24 +207,34 @@
                         }, 500);
                     });
                 }, 1000);
+                const avatarImg = document.querySelector('.avatar-img');
+                let toggle = false;
+                setInterval(() => {
+                    avatarImg.src = toggle ? 'imgs/me.png' : 'imgs/me2.png';
+                    toggle = !toggle;
+                }, 1000);
             });
         </script>
         <!-- Page 2 -->
         <div class="section">
             <div class="screen-area">
                 <img src="imgs/screen.png" alt="Screen" class="screen-img">
-                <div class="folders">
-                    <div class="folder" data-modal="about">
-                        <img src="imgs/folder_about.png" alt="About Me" class="folder-img">
-                        <span>About Me</span>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <img src="imgs/about_icon.png" alt="about me" class="icon-img">
+                        <div class="icon-label">about me</div>
                     </div>
-                    <div class="folder" data-modal="contact">
-                        <img src="imgs/folder_contact.png" alt="Contact" class="folder-img">
-                        <span>Contact</span>
+                    <div class="icon-item">
+                        <img src="imgs/activity_icon.png" alt="activity" class="icon-img">
+                        <div class="icon-label">activity</div>
                     </div>
-                    <div class="folder" data-modal="activities">
-                        <img src="imgs/folder_activities.png" alt="Activities" class="folder-img">
-                        <span>Activities</span>
+                    <div class="icon-item">
+                        <img src="imgs/contact_icon.png" alt="contact" class="icon-img">
+                        <div class="icon-label">contact</div>
+                    </div>
+                    <div class="icon-item">
+                        <img src="imgs/dcbot_icon.png" alt="my discord bot" class="icon-img">
+                        <div class="icon-label">my discord bot</div>
                     </div>
                 </div>
             </div>
