@@ -97,7 +97,7 @@
         .icon-grid {
             position: absolute;
             left: 17%;
-            top: 30%;
+            top: 28%;
             width: 66%;
             height: 60%;
             display: grid;
@@ -125,7 +125,7 @@
         }
 
         .icon-img {
-            width: 80px;
+            width: 100px;
             height: auto;
             margin-bottom: 8px;
         }
@@ -137,7 +137,31 @@
             text-shadow: 0 1px 6px #fff;
         }
 
+        @media (max-width: 600px) {
+            .screen-area {
+                max-width: 95vw;
+                width: 98vw;
+            }
 
+            .icon-img {
+                width: 52px;
+                margin-bottom: 4px;
+            }
+
+            .icon-label {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .icon-img {
+                width: 36px;
+            }
+
+            .icon-label {
+                font-size: 0.8em;
+            }
+        }
 
         @keyframes fadein {
             0% {
