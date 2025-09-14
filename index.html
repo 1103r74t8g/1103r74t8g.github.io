@@ -96,15 +96,7 @@
             display: block;
         }
 
-        @media (max-width: 480px) {
-            .avatar-text {
-                font-size: 1.2em;
-            }
 
-            .cat-text {
-                font-size: 1em;
-            }
-        }
 
         @keyframes fadein {
             0% {
@@ -144,10 +136,38 @@
         <div class="section">
             <div class="avatar-wrap">
                 <img src="imgs/me.png" alt="My Avatar" class="avatar-img">
-                <div class="avatar-text">Hi, This is Me</div>
-                <div class="cat-text">AND MY CAT !</div>
+                <div class="avatar-text"></div>
+                <div class="cat-text"></div>
             </div>
         </div>
+        <script>
+            function typeEffect(element, text, delay = 80, callback) {
+                element.textContent = "";
+                let i = 0;
+                function type() {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(type, delay);
+                    } else if (callback) {
+                        callback();
+                    }
+                }
+                type();
+            }
+
+            window.addEventListener("DOMContentLoaded", function () {
+                const avatarText = document.querySelector('.avatar-text');
+                const catText = document.querySelector('.cat-text');
+                setTimeout(() => {
+                    typeEffect(avatarText, "Hi, This is Me", 80, function () {
+                        setTimeout(() => {
+                            typeEffect(catText, "AND MY CAT !", 100);
+                        }, 500);
+                    });
+                }, 1000);
+            });
+        </script>
         <!-- Page 2 -->
         <div class="section">
             <div class="screen-area">
