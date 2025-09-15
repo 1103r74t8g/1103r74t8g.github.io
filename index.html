@@ -3,287 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>my website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schoolbell&family=Titan+One&display=swap" rel="stylesheet">
-    <title>my website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- fullPage.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.21/fullpage.min.css" />
-    <style>
-        .fp-watermark {
-            display: none !important;
-        }
-
-        body {
-            font-family: 'Schoolbell', 'Segoe UI', Arial, sans-serif;
-            background: #EDE6D6;
-            margin: 0;
-            padding: 0;
-        }
-
-        .section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-            box-sizing: border-box;
-            overflow-x: hidden;
-        }
-
-        .avatar-wrap {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            max-width: 800px;
-            aspect-ratio: 1/1;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            display: block;
-            opacity: 0;
-            animation: fadein 1s ease-in forwards;
-        }
-
-        .avatar-text {
-            position: absolute;
-            left: 52%;
-            top: 30%;
-            transform: translate(-50%, -50%);
-            font-size: 3em;
-            color: #4A3C3C;
-            text-align: center;
-            text-shadow: 0 2px 8px #fff;
-            width: 100%;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .cat-text {
-            position: absolute;
-            left: 42%;
-            top: 70%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5em;
-            color: #4A3C3C;
-            text-align: center;
-            text-shadow: 0 2px 8px #fff;
-            width: 100%;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .screen-area {
-            position: relative;
-            width: 90vw;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .screen-img {
-            width: 100%;
-            display: block;
-            border-radius: 16px;
-        }
-
-        .icon-grid {
-            position: absolute;
-            left: 17%;
-            top: 28%;
-            width: 66%;
-            height: 60%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 8px 32px;
-            justify-items: center;
-            align-items: start;
-        }
-
-        .icon-item:hover .icon-img {
-            transform: scale(1.12);
-            transition: transform 0.2s cubic-bezier(.4, 2, .3, 1);
-        }
-
-        .icon-img {
-            transition: transform 0.2s cubic-bezier(.4, 2, .3, 1);
-        }
-
-        .icon-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .icon-img {
-            width: 100px;
-            height: auto;
-            margin-bottom: 8px;
-        }
-
-        .icon-label {
-            font-size: 1.5em;
-            color: #333;
-            text-align: center;
-            text-shadow: 0 1px 6px #fff;
-        }
-
-        @media (max-width: 600px) {
-            .screen-area {
-                max-width: 95vw;
-                width: 98vw;
-            }
-
-            .icon-img {
-                width: 52px;
-                margin-bottom: 4px;
-            }
-
-            .icon-label {
-                font-size: 1em;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .icon-img {
-                width: 36px;
-            }
-
-            .icon-label {
-                font-size: 0.8em;
-            }
-        }
-
-        @keyframes fadein {
-            0% {
-                opacity: 0;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 40px auto;
-            background: #e4e4e4;
-            padding: 2em;
-            box-shadow: 0 2px 8px #aaa;
-            border-radius: 8px;
-        }
-
-        h1 {
-            color: #490e0e;
-        }
-
-        a {
-            color: #466687;
-        }
-
-        .cat {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 160px;
-            height: 160px;
-            background: url('imgs/Cat Sprite Sheet.png') no-repeat 0 0;
-            background-size: 1280px 1600px;
-            image-rendering: pixelated;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div id="cat" class="cat"></div>
-
-    <script>
-        const SPRITES = {
-            idle1: { row: 0, frames: 4, delay: 400 },
-            idle2: { row: 1, frames: 4, delay: 400 },
-            clean1: { row: 2, frames: 4, delay: 200 },
-            clean2: { row: 3, frames: 4, delay: 200 },
-            walk: { row: 4, frames: 8, delay: 120 },
-            run: { row: 5, frames: 8, delay: 100 },
-            sleep: { row: 6, frames: 4, delay: 900 }
-        };
-
-        const frameWidth = 160;
-        const frameHeight = 160;
-        let frame = 0;
-        let catState = "idle1";
-        let animTimer;
-        let actionTimer;
-        const cat = document.getElementById('cat');
-        const STATES = ["sleep", "idle1", "idle2", "clean1", "clean2"];
-
-        function setCatState(state) {
-            catState = state;
-            frame = 0;
-            clearInterval(animTimer);
-
-            const s = SPRITES[catState];
-            animTimer = setInterval(() => {
-                cat.style.backgroundPosition = `-${frame * frameWidth}px -${s.row * frameHeight}px`;
-                frame = (frame + 1) % s.frames;
-            }, s.delay);
-
-            clearTimeout(actionTimer);
-
-            let nextDelay;
-            if (catState === "sleep") nextDelay = 20000;
-            else if (catState.startsWith("idle1")) nextDelay = 15000;
-            else if (catState.startsWith("clean1")) nextDelay = 4000;
-            else if (catState.startsWith("idle2")) nextDelay = 15000;
-            else if (catState.startsWith("clean2")) nextDelay = 4000;
-
-            actionTimer = setTimeout(() => {
-                let next;
-                do {
-                    next = STATES[Math.floor(Math.random() * STATES.length)];
-                } while (next === catState);
-                setCatState(next);
-            }, nextDelay);
-        }
-        setCatState("idle1");
-
-        function playFallAnimation(callback) {
-            clearInterval(animTimer);
-            clearTimeout(actionTimer);
-            catState = "fall";
-            const fallFrames = [3, 4, 5, 6];
-            let i = 0;
-            cat.style.transition = "transform 0.8s cubic-bezier(.5,1.8,.5,.8)";
-            cat.style.transform = "translateY(-200px)";
-            cat.style.backgroundPosition = `-${fallFrames[0] * frameWidth}px -${8 * frameHeight}px`;
-            setTimeout(() => {
-                cat.style.transition = "transform 0.8s cubic-bezier(.5,1.1,.6,1)";
-                cat.style.transform = "translateY(0px)";
-                animTimer = setInterval(() => {
-                    cat.style.backgroundPosition = `-${fallFrames[i] * frameWidth}px -${8 * frameHeight}px`;
-                    i++;
-                    if (i >= fallFrames.length) {
-                        clearInterval(animTimer);
-                        if (callback) callback();
-                    }
-                }, 150);
-            }, 200);
-        }
-    </script>
-
     <div id="fullpage">
         <!-- Page 1 -->
         <div class="section">
@@ -293,40 +24,6 @@
                 <div class="cat-text"></div>
             </div>
         </div>
-        <script>
-            function typeEffect(element, text, delay = 80, callback) {
-                element.textContent = "";
-                let i = 0;
-                function type() {
-                    if (i < text.length) {
-                        element.textContent += text.charAt(i);
-                        i++;
-                        setTimeout(type, delay);
-                    } else if (callback) {
-                        callback();
-                    }
-                }
-                type();
-            }
-
-            window.addEventListener("DOMContentLoaded", function () {
-                const avatarText = document.querySelector('.avatar-text');
-                const catText = document.querySelector('.cat-text');
-                setTimeout(() => {
-                    typeEffect(avatarText, "Hi, This is Me", 80, function () {
-                        setTimeout(() => {
-                            typeEffect(catText, "AND MY CAT !", 100);
-                        }, 500);
-                    });
-                }, 1000);
-                const avatarImg = document.querySelector('.avatar-img');
-                let toggle = false;
-                setInterval(() => {
-                    avatarImg.src = toggle ? 'imgs/me.png' : 'imgs/me2.png';
-                    toggle = !toggle;
-                }, 1000);
-            });
-        </script>
         <!-- Page 2 -->
         <div class="section">
             <div class="screen-area">
@@ -351,23 +48,11 @@
                 </div>
             </div>
         </div>
-        <!-- more .section -->
+        <!-- 更多 section 可加在這 -->
     </div>
-    <!-- fullPage.js JS -->
+    <!-- JS 放在 body 最底部 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.21/fullpage.min.js"></script>
-    <script>
-        new fullpage('#fullpage', {
-            autoScrolling: true,
-            navigation: true,
-            onLeave: function (origin, destination, direction) {
-                if (direction === "down") {
-                    playFallAnimation(() => {
-                        setCatState("idle1");
-                    });
-                }
-            }
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>
